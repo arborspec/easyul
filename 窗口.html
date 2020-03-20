@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+		<script type="text/javascript" src="easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+		
+		<script type="text/javascript">
+			//包括警示（alert）、确认（confirm）、提示（prompt）、进展（progress）
+			function jgk(){
+				$.messager.alert('警告1','这是一个提示信息！');
+				$.messager.alert('警告1','这是一个提示信息！','error');
+				$.messager.alert('警告2','这是一个提示信息！','question');
+				$.messager.alert('警告3','这是一个提示信息！','info');
+				$.messager.alert('警告4','这是一个提示信息！','warning');
+			}
+			
+			//对话框
+			function qrk(){
+				//confirm('确定删除吗')
+				$.messager.confirm('删除对话框','是否退出？',function(r){
+					//r接受到true 或者是false
+					alert(r);
+				});
+			}
+			
+			//接收框
+			function jsk(){
+				$.messager.prompt('接收框', '请输入你的名字', function(r){
+					alert("接收到的名字:"+r);
+				});
+			}
+			
+			//进度条框
+			function jdtk(){			
+				$.messager.progress({
+					title:"页面正在加载。。。",
+					interval:1000
+					//text:"我已经很努力的。。"
+				});
+				
+				//11秒之后执行goIndex()脚本
+				setTimeout("goIndex()",11000);
+			}
+			function goIndex(){
+				$.messager.progress("close");
+				 location.href="进度条.html";
+			}
+			//加载事件
+			$(function(){
+				//显示框
+				$.messager.show({
+					title:'我的消息',
+					msg:'欢迎！啊哈！',
+					timeout:5000,
+					showType:'fade',
+					showSpeed:1000
+				});
+			})
+		</script>
+		
+	</head>
+	<body>
+		
+		
+		<button onclick="jgk()">我是警告框</button><br />
+		<button onclick="qrk()">我是确认框</button><br />
+		<button onclick="jsk()">我是接受框</button><br />
+		<button onclick="jdtk()">进度条框</button><br />
+	
+	    <br />
+		<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">按钮1</a>
+		<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">按钮2</a>
+		<a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">按钮3</a>
+	</body>
+</html>

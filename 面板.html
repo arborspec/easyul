@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+		<script type="text/javascript" src="easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+
+	</head>
+
+	<body>
+		<!--
+        	作者：offline
+        	时间：2020-03-13
+        	描述：面板操作
+      -->
+		<!--操作面板的打开关闭 -->
+		<div style="margin:20px 0 10px 0;">
+			<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('open')">打开</a>
+			<a href="#" class="easyui-linkbutton" onclick="javascript:$('#p').panel('close')">关闭</a>
+		</div>
+
+		<div id="p" class="easyui-panel" title="我是面板的标题" style="width:300px;height:150px;padding:10px;">
+			<p style="font-size:14px">面板的标题头部</p>
+			<ul>
+				<li>啊哈</li>
+			</ul>
+		</div>
+		<hr />
+
+		<!-- 第一个div设置扩大后的面板大小  通过标记创建面板（Panel）-->
+		<div style="width:400px;height: 300px;border: 1px solid red;">
+			<!-- 第二个div设置初始面板大小-->
+			<div id="panel2" class="easyui-panel" title="My Panel" style="width:200px;height:200px;padding:10px;background:#fafafa;" data-options="iconCls:'icon-add',closable:true,    
+                collapsible:true,minimizable:true,maximizable:true,openAnimation:'slide',openDuration:1000">
+				<p style="font-size:14px">面板的标题头部</p>
+				<ul>
+					<li>啊哈</li>
+				</ul>
+			</div>
+			<button type="button" onclick="javascript:$('#panel2').panel('open')">显示面板</button>
+		</div>
+
+		<hr />
+
+		<!--编程创建面板（Panel） 
+			属性：collapsible	boolean	定义是否显示折叠按钮。	    false
+				minimizable	boolean	定义是否显示最小化按钮。	false
+				maximizable	boolean	定义是否显示最大化按钮。	false
+				closable	boolean	定义是否显示关闭按钮。                false
+				tools	array,selector	自定义工具组，可能的值：
+				1、数组，每个元素包含 iconCls 和 handler 两个属性。
+				2、选择器，指示工具组。
+				
+			事件：	
+			    onLoad	none	当远程数据被加载时触发。
+				onBeforeOpen	none	面板（panel）打开前触发，返回 false 就停止打开。
+				onOpen	none	面板（panel）打开后触发。
+				onBeforeClose	none	面板（panel）关闭前触发，返回 false 就取消关闭。下面声明的面板（panel）不会关闭。
+				<div class="easyui-panel" style="width:300px;height:200px;"
+						title="My Panel" data-options="onBeforeClose:function(){return false}">
+					The panel cannot be closed.
+				</div>
+				
+				onClose	none	面板（panel）关闭后触发。
+				
+				移动面板（Panel）      调用 'move' 方法把面板（Panel）移动到新位置。
+				$('#p').panel('move',{
+				    left:100,
+				    top:100
+				}); 
+				
+				加载内容
+				让我们通过 ajax 加载面板（panel）内容并且当加载成功时显示一些信息。
+				$('#p').panel({
+				    href:'content_url.php',
+				    onLoad:function(){
+						alert('loaded successfully');
+				    }
+				});
+		-->
+		<div id="panel3"></div>
+		<script type="text/javascript">
+			$(function() {
+				$('#panel3').panel({
+					//基础属性
+					width: 500,
+					height: 150,
+					title: "我是面板3",
+					collapsible:true,
+				   	maximizable:true,
+				   	closable:true,
+					//添加工具
+					tools: [{
+						//添加按钮
+						iconCls: 'icon-add',
+						handler: function() {
+							alert('点击我添加')
+						}
+					}, {
+						//保存按钮
+						iconCls: 'icon-save',
+						handler: function() {
+							alert('点击我保存')
+						}
+					}],
+					//添加事件
+					onBeforeOpen:function(){
+						//return false;//返回false会取消掉当前事件
+						alert('打开前事件')
+					},
+					
+					onOpen:function(){
+						alert('打看后触发事件')
+					},
+					
+					onBeforeClose:function(){
+						alert('关闭后触发事件')
+					}
+				});
+			})
+		</script>
+	</body>
+	<hr />
+
+</html>

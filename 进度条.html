@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+		<script type="text/javascript" src="easyui/jquery.min.js"></script>
+		<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			
+			function jz(){
+				//延迟器: 延迟一段时间调用一次方法
+				//setTimeout("方法()",毫秒数);
+				//定时器：每隔多少毫秒执行一次函数
+				//setInterval("函数名",时间（毫秒）);
+				id=setInterval("downLoad()",1000);
+			}
+			
+			function downLoad() {
+				//取进度条当前在
+				var value = $('#p2').progressbar('getValue'); 
+				value=value+10;
+				if(value<=100){
+					$('#p2').progressbar('setValue',value);
+				}else{
+					clearInterval(id);//清空定时器
+					alert("下载成功！");
+				}
+				
+			}
+		</script>
+		<div id="p" class="easyui-progressbar" data-options="value:60" style="width:400px;"></div>
+		<div id="p2" class="easyui-progressbar" data-options="value:0" style="background-color: pink;width:400px"></div>
+		<button onclick="jz()">加载</button>
+	</body>
+
+</html>
